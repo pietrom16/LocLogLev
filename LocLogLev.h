@@ -58,15 +58,15 @@ LogLevel operator|(LogLevel _level, LogLevel _localThreshold)
 
 /// Function in case levels are expressed as int values
 
-LogLevel Level(int _level, int _localThreshold)
+int Level(int _level, int _localThreshold)
 {
 	if(_level >= globalThreshold)
-		return LogLevel(_level);
+		return _level;
 
 	if(_level >= _localThreshold)
 		return globalThreshold;
 
-	return LogLevel(_level);
+	return _level;
 }
 
 
