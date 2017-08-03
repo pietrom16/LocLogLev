@@ -15,8 +15,9 @@
  *
  *  E.g.:
  *    LogLevel localThreshold = detail;
- *    log(warning) << "Standard log message";
- *    log(warning | localThreshold) << "Log message";
+ *    log(warning) << "Message";                   // log if  threshold < warning
+ *    log(warning | localThreshold) << "Message";  // log if  threshold < warning
+ *                                                 //     or  localThreshold < warning
  *
  *
  *  Logger requirements:
