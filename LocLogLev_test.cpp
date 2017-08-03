@@ -6,7 +6,7 @@
 #include "LocLogLev.h"
 
 
-static const LogLevel localThreshold  = verbose;
+static const LogLevel cLocalThreshold  = verbose;
 
 
 // Test log class; it should work with every logger
@@ -35,16 +35,22 @@ public:
 
 int main()
 {
-	TestLog log;
-	int j = int(localThreshold);
+	TestLog  log;
+	LogLevel localThreshold    = cLocalThreshold;
+	int      intLocalThreshold = int(cLocalThreshold);
 
-	for(int i = nolog; i <= fatal; ++i)
+	std::cout << "\nGlobal threshold = " << globalThreshold;
+	std::cout << "\nLocal threshold  = " << intLocalThreshold << "\n";
+
+	for(int intLevel = nolog; intLevel <= fatal; ++intLevel)
 	{
-		LogLevel level = LogLevel(i);
+		LogLevel level = LogLevel(intLevel);
+
+		std::cout << "\nLevel = " << level << ":\n";
 
 		log(level) << "Test message, level: " << level << "\n";
-		log(Level(i, j)) << "Function | Test message, level: " << level << " Local threshold: " << localThreshold << "\n";
-		log(level | localThreshold) << "Operator | Test message, level: " << level << " Local threshold: " << localThreshold << "\n";
+		log(Level(intLevel, intLocalThreshold)) << "Function Level()  Test message, level: " << level << " Local threshold: " << localThreshold << "\n";
+		log(level | localThreshold)             << "Operator |        Test message, level: " << level << " Local threshold: " << localThreshold << "\n";
 	}
 
 	return 0;
